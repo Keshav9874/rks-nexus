@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RKS Nexus - Dashboard</title>
+    <style>
+        :root {
+            --color-bg: #0f1419;
+            --color-card: #1a1f29;
+            --color-primary: #32b8c6;
+            --color-secondary: #7df9ff;
+            --color-text: #e8eaed;
+            --color-text-dim: #9aa0a6;
+            --color-success: #34a853;
+            --color-warning: #fbbc04;
+            --color-danger: #ea4335;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: var(--color-card);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .welcome h1 {
+            font-size: 28px;
+            color: var(--color-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .welcome p {
+            color: var(--color-text-dim);
+            font-size: 14px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(50, 184, 198, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--color-text);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .btn-danger {
+            background: var(--color-danger);
+            color: white;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .card {
+            background: var(--color-card);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--color-secondary);
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: var(--color-text-dim);
+            font-size: 14px;
+        }
+        
+        .info-value {
+            color: var(--color-text);
+            font-weight: 600;
+        }
+        
+        .application-item {
+            background: rgba(255,255,255,0.05);
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--color-primary);
+        }
+        
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .program-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-pending { background: rgba(251, 188, 4, 0.2); color: var(--color-warning); }
+        .status-approved { background: rgba(52, 168, 83, 0.2); color: var(--color-success); }
+        .status-rejected { background: rgba(234, 67, 53, 0.2); color: var(--color-danger); }
+        .status-in-progress { background: rgba(50, 184, 198, 0.2); color: var(--color-primary); }
+        
+        .application-date {
+            color: var(--color-text-dim);
+            font-size: 13px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--color-text-dim);
+        }
+        
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--color-card);
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            margin-bottom: 24px;
+        }
+        
+        .modal-header h2 {
+            color: var(--color-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text);
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .modal-actions .btn {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .header-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Header -->
+        <div class="header">
+            <div class="welcome">
+                <h1>Welcome back, <span id="userName">...</span>!</h1>
+                <p id="userEmail">Loading...</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-primary" id="applyBtn">Apply for Internship</button>
+                <button class="btn btn-secondary" id="editProfileBtn">Edit Profile</button>
+                <button class="btn btn-danger" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+        
+        <!-- Grid -->
+        <div class="grid">
+            <!-- Profile Card -->
+            <div class="card">
+                <h2>📋 Your Profile</h2>
+                <div class="info-row">
+                    <span class="info-label">Name</span>
+                    <span class="info-value" id="profileName">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email</span>
+                    <span class="info-value" id="profileEmail">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Phone</span>
+                    <span class="info-value" id="profilePhone">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Program</span>
+                    <span class="info-value" id="profileProgram">-</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Status</span>
+                    <span class="info-value" id="profileVerified">-</span>
+                </div>
+            </div>
+            
+            <!-- Stats Card -->
+            <div class="card">
+                <h2>📊 Application Stats</h2>
+                <div class="info-row">
+                    <span class="info-label">Total Applications</span>
+                    <span class="info-value" id="totalApps">0</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Pending</span>
+                    <span class="info-value status-pending" id="pendingApps">0</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Approved</span>
+                    <span class="info-value status-approved" id="approvedApps">0</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">In Progress</span>
+                    <span class="info-value status-in-progress" id="inProgressApps">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Applications -->
+        <div class="card">
+            <h2>📝 Your Applications</h2>
+            <div id="applicationsList"></div>
+        </div>
+    </div>
+    
+    <!-- Apply Modal -->
+    <div class="modal" id="applyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Apply for Internship</h2>
+                <p style="color: var(--color-text-dim);">Fill in the details below</p>
+            </div>
+            <form id="applyForm">
+                <div class="form-group">
+                    <label class="form-label">Program *</label>
+                    <select class="form-select" id="applyProgram" required>
+                        <option value="">Select a program</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="java-development">Java Development</option>
+                        <option value="python-development">Python Development</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Experience Level</label>
+                    <select class="form-select" id="applyExperience">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Education</label>
+                    <input type="text" class="form-input" id="applyEducation" placeholder="e.g., B.Tech Computer Science">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Why do you want to join?</label>
+                    <textarea class="form-textarea" id="applyMotivation" placeholder="Tell us about your goals..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="closeApplyModal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Profile</h2>
+                <p style="color: var(--color-text-dim);">Update your information</p>
+            </div>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label class="form-label">Name *</label>
+                    <input type="text" class="form-input" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-input" id="editPhone">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Preferred Program</label>
+                    <select class="form-select" id="editProgram">
+                        <option value="">Not specified</option>
+                        <option value="web-development">Web Development</option>
+                        <option value="java-development">Java Development</option>
+                        <option value="python-development">Python Development</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="closeEditModal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+        const token = localStorage.getItem('token');
+        
+        // Redirect if not logged in
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+        
+        let currentUser = null;
+        
+        // Fetch user profile
+        async function loadProfile() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentUser = data.user;
+                    displayProfile(data.user);
+                } else {
+                    alert('Session expired! Please login again.');
+                    logout();
+                }
+            } catch (error) {
+                console.error('Profile load error:', error);
+                alert('Failed to load profile. Please try again.');
+            }
+        }
+        
+        // Display profile data
+        function displayProfile(user) {
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('userEmail').textContent = user.email;
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profilePhone').textContent = user.phone || 'Not provided';
+            document.getElementById('profileProgram').textContent = formatProgram(user.program) || 'Not specified';
+            document.getElementById('profileVerified').textContent = user.isVerified ? '✅ Verified' : '⏳ Not verified';
+        }
+        
+        // Fetch applications
+        async function loadApplications() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/applications/my-applications`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayApplications(data.applications);
+                    updateStats(data.applications);
+                }
+            } catch (error) {
+                console.error('Applications load error:', error);
+            }
+        }
+        
+        // Display applications
+        function displayApplications(applications) {
+            const container = document.getElementById('applicationsList');
+            
+            if (applications.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <p>No applications yet. Apply for an internship to get started!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = applications.map(app => `
+                <div class="application-item">
+                    <div class="application-header">
+                        <span class="program-name">${formatProgram(app.program)}</span>
+                        <span class="status-badge status-${app.status}">${app.status.toUpperCase()}</span>
+                    </div>
+                    <div class="application-date">
+                        Applied on: ${new Date(app.submittedAt).toLocaleDateString('en-IN', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}
+                    </div>
+                    ${app.motivation ? `<p style="margin-top: 8px; color: var(--color-text-dim); font-size: 13px;">${app.motivation}</p>` : ''}
+                </div>
+            `).join('');
+        }
+        
+        // Update stats
+        function updateStats(applications) {
+            document.getElementById('totalApps').textContent = applications.length;
+            document.getElementById('pendingApps').textContent = applications.filter(a => a.status === 'pending').length;
+            document.getElementById('approvedApps').textContent = applications.filter(a => a.status === 'approved').length;
+            document.getElementById('inProgressApps').textContent = applications.filter(a => a.status === 'in-progress').length;
+        }
+        
+        // Format program name
+        function formatProgram(program) {
+            if (!program) return '';
+            return program.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Apply for internship
+        document.getElementById('applyForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                program: document.getElementById('applyProgram').value,
+                experience: document.getElementById('applyExperience').value,
+                education: document.getElementById('applyEducation').value,
+                motivation: document.getElementById('applyMotivation').value
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/applications/submit`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('✅ Application submitted successfully!');
+                    closeModal('applyModal');
+                    document.getElementById('applyForm').reset();
+                    loadApplications();
+                } else {
+                    alert('❌ ' + data.message);
+                }
+            } catch (error) {
+                console.error('Application submit error:', error);
+                alert('Failed to submit application. Please try again.');
+            }
+        });
+        
+        // Edit profile (placeholder - backend route needed)
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            alert('Profile update feature coming soon!');
+            closeModal('editProfileModal');
+        });
+        
+        // Logout
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'index.html';
+        }
+        
+        // Event listeners
+        document.getElementById('applyBtn').addEventListener('click', () => openModal('applyModal'));
+        document.getElementById('closeApplyModal').addEventListener('click', () => closeModal('applyModal'));
+        document.getElementById('editProfileBtn').addEventListener('click', () => {
+            // Pre-fill form
+            if (currentUser) {
+                document.getElementById('editName').value = currentUser.name;
+                document.getElementById('editPhone').value = currentUser.phone || '';
+                document.getElementById('editProgram').value = currentUser.program || '';
+            }
+            openModal('editProfileModal');
+        });
+        document.getElementById('closeEditModal').addEventListener('click', () => closeModal('editProfileModal'));
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            if (confirm('Are you sure you want to logout?')) {
+                logout();
+            }
+        });
+        
+        // Close modals on outside click
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // Load data on page load
+        loadProfile();
+        loadApplications();
+    </script>
+</body>
+</html>

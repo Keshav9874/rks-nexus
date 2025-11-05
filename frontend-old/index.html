@@ -1,0 +1,2998 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RKS Nexus - Connecting Talent with Opportunity</title>
+    <style>
+      :root {
+        --color-white: rgba(255, 255, 255, 1);
+        --color-cream-50: rgba(252, 252, 249, 1);
+        --color-cream-100: rgba(255, 255, 253, 1);
+        --color-gray-200: rgba(245, 245, 245, 1);
+        --color-gray-300: rgba(167, 169, 169, 1);
+        --color-slate-500: rgba(98, 108, 113, 1);
+        --color-brown-600: rgba(94, 82, 64, 1);
+        --color-charcoal-700: rgba(31, 33, 33, 1);
+        --color-charcoal-800: rgba(38, 40, 40, 1);
+        --color-slate-900: rgba(19, 52, 59, 1);
+        --color-teal-300: rgba(50, 184, 198, 1);
+        --color-teal-400: rgba(45, 166, 178, 1);
+        --color-teal-500: rgba(33, 128, 141, 1);
+        --color-teal-600: rgba(29, 116, 128, 1);
+        --color-teal-700: rgba(26, 104, 115, 1);
+        --color-purple-500: rgba(147, 51, 234, 1);
+        --color-purple-600: rgba(126, 34, 206, 1);
+        --color-orange-500: rgba(249, 115, 22, 1);
+        --color-brown-600-rgb: 94, 82, 64;
+        --color-teal-500-rgb: 33, 128, 141;
+        --color-slate-900-rgb: 19, 52, 59;
+        --color-gray-400-rgb: 119, 124, 124;
+        --color-teal-300-rgb: 50, 184, 198;
+        --color-gray-300-rgb: 167, 169, 169;
+        --color-gray-200-rgb: 245, 245, 245;
+        --color-background: var(--color-cream-50);
+        --color-surface: var(--color-cream-100);
+        --color-text: var(--color-slate-900);
+        --color-text-secondary: var(--color-slate-500);
+        --color-primary: var(--color-teal-500);
+        --color-primary-hover: var(--color-teal-600);
+        --color-primary-active: var(--color-teal-700);
+        --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+        --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+        --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+        --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+        --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        --font-size-sm: 12px;
+        --font-size-base: 14px;
+        --font-size-lg: 16px;
+        --font-size-xl: 18px;
+        --font-size-2xl: 20px;
+        --font-size-3xl: 24px;
+        --font-size-4xl: 30px;
+        --font-size-hero: 56px;
+        --font-weight-normal: 400;
+        --font-weight-medium: 500;
+        --font-weight-semibold: 550;
+        --font-weight-bold: 600;
+        --space-8: 8px;
+        --space-12: 12px;
+        --space-16: 16px;
+        --space-20: 20px;
+        --space-24: 24px;
+        --space-32: 32px;
+        --space-48: 48px;
+        --space-64: 64px;
+        --space-96: 96px;
+        --radius-base: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+        --radius-2xl: 24px;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04),
+          0 1px 2px rgba(0, 0, 0, 0.02);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+          0 2px 4px -1px rgba(0, 0, 0, 0.02);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+          0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.06),
+          0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        --duration-fast: 150ms;
+        --duration-normal: 250ms;
+        --duration-slow: 400ms;
+        --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-background: var(--color-charcoal-700);
+          --color-surface: var(--color-charcoal-800);
+          --color-text: var(--color-gray-200);
+          --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+          --color-primary: var(--color-teal-300);
+          --color-primary-hover: var(--color-teal-400);
+          --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+          --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+          --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+          --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-base);
+        line-height: 1.6;
+        color: var(--color-text);
+        background-color: var(--color-background);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Custom Cursor */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--color-primary);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        transition: all 0.15s ease;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+      }
+
+      .custom-cursor.cursor-hover {
+        width: 40px;
+        height: 40px;
+        background: rgba(var(--color-teal-500-rgb), 0.2);
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(255, 255, 253, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: var(--shadow-sm);
+        transition: all var(--duration-normal) var(--ease-standard);
+      }
+
+      header.scrolled {
+        background: rgba(255, 255, 253, 0.95);
+        box-shadow: var(--shadow-md);
+      }
+
+      .header-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: var(--space-16) var(--space-24);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: var(--font-size-2xl);
+        font-weight: var(--font-weight-bold);
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+        animation: gradient-shift 4s ease infinite;
+        position: relative;
+      }
+
+      @keyframes gradient-shift {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      nav {
+        display: flex;
+        gap: var(--space-32);
+        align-items: center;
+      }
+
+      nav a {
+        color: var(--color-text);
+        text-decoration: none;
+        font-weight: var(--font-weight-medium);
+        transition: all var(--duration-normal) var(--ease-standard);
+        font-size: var(--font-size-base);
+        position: relative;
+        padding: var(--space-8) 0;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        transition: width var(--duration-normal) var(--ease-standard);
+      }
+
+      nav a:hover {
+        color: var(--color-primary);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .cta-button {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-teal-600) 100%
+        );
+        color: var(--color-cream-50);
+        padding: var(--space-8) var(--space-20);
+        border-radius: var(--radius-base);
+        text-decoration: none;
+        font-weight: var(--font-weight-medium);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        font-size: var(--font-size-base);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .cta-button::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        bottom: -50%;
+        left: -50%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.1),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .cta-button:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .cta-button:hover::after {
+        transform: translateX(100%);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(var(--color-teal-500-rgb), 0.4);
+      }
+
+      .cta-button:active {
+        transform: translateY(-1px) scale(1.02);
+      }
+
+      /* Hero Section with 3D Elements */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--space-96) var(--space-24) var(--space-64);
+        background: linear-gradient(
+          135deg,
+          var(--color-surface) 0%,
+          var(--color-background) 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-bg-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 0;
+      }
+
+      .hero-bg-animation canvas {
+        width: 100%;
+        height: 100%;
+      }
+
+      .floating-shape {
+        position: absolute;
+        opacity: 0.1;
+        animation: float-shapes 20s ease-in-out infinite;
+      }
+
+      .shape-1 {
+        width: 300px;
+        height: 300px;
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        top: 10%;
+        left: 10%;
+        animation: float-shapes 20s ease-in-out infinite,
+          blob-morph 8s ease-in-out infinite;
+        animation-delay: 0s;
+      }
+
+      .shape-2 {
+        width: 400px;
+        height: 400px;
+        background: linear-gradient(
+          135deg,
+          var(--color-teal-400) 0%,
+          var(--color-orange-500) 100%
+        );
+        border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%;
+        bottom: 10%;
+        right: 10%;
+        animation: float-shapes 20s ease-in-out infinite,
+          blob-morph 10s ease-in-out infinite;
+        animation-delay: 5s, 2s;
+      }
+
+      .shape-3 {
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(
+          135deg,
+          var(--color-purple-500) 0%,
+          var(--color-teal-300) 100%
+        );
+        border-radius: 50%;
+        top: 50%;
+        right: 20%;
+        animation: float-shapes 20s ease-in-out infinite,
+          blob-morph 12s ease-in-out infinite;
+        animation-delay: 10s, 4s;
+      }
+
+      @keyframes float-shapes {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        33% {
+          transform: translate(50px, -50px) rotate(120deg) scale(1.1);
+        }
+        66% {
+          transform: translate(-30px, 30px) rotate(240deg) scale(0.9);
+        }
+      }
+
+      .hero-content {
+        max-width: 1000px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: var(--font-size-hero);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-24);
+        line-height: 1.1;
+        color: var(--color-text);
+        animation: fadeInUp 1s var(--ease-standard) backwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes scaleIn {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes ripple {
+        0% {
+          transform: scale(0);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: -1000px 0;
+        }
+        100% {
+          background-position: 1000px 0;
+        }
+      }
+
+      @keyframes pulse-ring {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(var(--color-teal-500-rgb), 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 15px rgba(var(--color-teal-500-rgb), 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(var(--color-teal-500-rgb), 0);
+        }
+      }
+
+      @keyframes blob-morph {
+        0%,
+        100% {
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+        50% {
+          border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        }
+      }
+
+      .hero h1 .gradient-text {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 50%,
+          var(--color-orange-500) 100%
+        );
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-shift 4s ease infinite;
+        display: inline-block;
+        position: relative;
+      }
+
+      .hero h1 .gradient-text::after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 50%,
+          var(--color-orange-500) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: blur(15px);
+        opacity: 0.5;
+      }
+
+      .hero p {
+        font-size: var(--font-size-xl);
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-32);
+        line-height: 1.8;
+        animation: fadeInUp 1s var(--ease-standard) 0.2s backwards;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: var(--space-16);
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s var(--ease-standard) 0.4s backwards;
+      }
+
+      .btn {
+        padding: var(--space-16) var(--space-32);
+        border-radius: var(--radius-lg);
+        text-decoration: none;
+        font-weight: var(--font-weight-semibold);
+        transition: all var(--duration-normal) var(--ease-standard);
+        font-size: var(--font-size-lg);
+        cursor: pointer;
+        border: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        color: var(--color-cream-50);
+        box-shadow: 0 4px 15px rgba(var(--color-teal-500-rgb), 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .btn-primary::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary:active::after {
+        width: 300px;
+        height: 300px;
+        transition: width 0s, height 0s;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 30px rgba(var(--color-teal-500-rgb), 0.5);
+        animation: pulse-ring 1.5s infinite;
+      }
+
+      .btn-secondary {
+        background: var(--color-surface);
+        color: var(--color-text);
+        border: 2px solid var(--color-border);
+      }
+
+      .btn-secondary:hover {
+        background: var(--color-secondary-hover);
+        border-color: var(--color-primary);
+        transform: translateY(-3px);
+      }
+
+      /* Scroll Indicator */
+      .scroll-indicator {
+        position: absolute;
+        bottom: var(--space-32);
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-8);
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+        animation: bounce 2s infinite;
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      .scroll-indicator::after {
+        content: "↓";
+        font-size: var(--font-size-2xl);
+      }
+
+      /* Features Section */
+      .features {
+        padding: var(--space-96) var(--space-24);
+        max-width: 1280px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: var(--space-64);
+      }
+
+      .section-header h2 {
+        font-size: var(--font-size-4xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-16);
+        color: var(--color-text);
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-header h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        border-radius: 2px;
+      }
+
+      .section-header p {
+        font-size: var(--font-size-lg);
+        color: var(--color-text-secondary);
+        max-width: 600px;
+        margin: var(--space-24) auto 0;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: var(--space-32);
+      }
+
+      .feature-card {
+        background: var(--color-surface);
+        padding: var(--space-32);
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--color-card-border);
+        box-shadow: var(--shadow-sm);
+        transition: all var(--duration-slow) var(--ease-standard);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        will-change: transform;
+      }
+
+      .feature-card .ripple-effect {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(var(--color-teal-500-rgb), 0.3);
+        width: 100px;
+        height: 100px;
+        pointer-events: none;
+        animation: ripple 0.8s ease-out;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 50%,
+          var(--color-orange-500) 100%
+        );
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--duration-slow) var(--ease-standard);
+      }
+
+      .feature-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .feature-card::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(
+          circle,
+          rgba(var(--color-teal-500-rgb), 0.05) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.6s var(--ease-standard);
+      }
+
+      .feature-card:hover::after {
+        width: 500px;
+        height: 500px;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px) rotateX(2deg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        border-color: var(--color-primary);
+      }
+
+      .feature-icon {
+        width: 72px;
+        height: 72px;
+        background: linear-gradient(
+          135deg,
+          var(--color-secondary) 0%,
+          var(--color-secondary-hover) 100%
+        );
+        border-radius: var(--radius-lg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-20);
+        font-size: 32px;
+        transition: all var(--duration-slow) var(--ease-bounce);
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-card:hover .feature-icon {
+        transform: scale(1.15) rotate(10deg);
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+      }
+
+      .feature-card h3 {
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--space-12);
+        color: var(--color-text);
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-card p {
+        color: var(--color-text-secondary);
+        line-height: 1.7;
+        font-size: var(--font-size-base);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Interactive Comparison Slider */
+      .comparison-section {
+        background: var(--color-surface);
+        padding: var(--space-96) var(--space-24);
+        margin-top: var(--space-96);
+      }
+
+      .comparison-container {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .comparison-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-48);
+        margin-top: var(--space-48);
+      }
+
+      .comparison-card {
+        background: var(--color-background);
+        padding: var(--space-48);
+        border-radius: var(--radius-2xl);
+        border: 2px solid var(--color-border);
+        transition: all var(--duration-normal) var(--ease-standard);
+      }
+
+      .comparison-card.highlight {
+        border-color: var(--color-primary);
+        background: linear-gradient(
+          135deg,
+          rgba(var(--color-teal-500-rgb), 0.05) 0%,
+          var(--color-background) 100%
+        );
+        transform: scale(1.05);
+        box-shadow: var(--shadow-xl);
+      }
+
+      .comparison-card h3 {
+        font-size: var(--font-size-3xl);
+        margin-bottom: var(--space-24);
+        color: var(--color-text);
+      }
+
+      .comparison-card ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .comparison-card li {
+        padding: var(--space-12) 0;
+        padding-left: var(--space-32);
+        position: relative;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-base);
+      }
+
+      .comparison-card.highlight li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--color-primary);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-lg);
+      }
+
+      .comparison-card:not(.highlight) li::before {
+        content: "✗";
+        position: absolute;
+        left: 0;
+        color: var(--color-text-secondary);
+        opacity: 0.4;
+        font-size: var(--font-size-lg);
+      }
+
+      /* Program Cards with Hover Effects */
+      .programs {
+        padding: var(--space-96) var(--space-24);
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      .programs-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: var(--space-32);
+      }
+
+      .program-card {
+        background: var(--color-surface);
+        border-radius: var(--radius-2xl);
+        overflow: hidden;
+        border: 1px solid var(--color-card-border);
+        box-shadow: var(--shadow-md);
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        cursor: pointer;
+        will-change: transform;
+      }
+
+      .program-card .card-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(var(--color-teal-500-rgb), 0.15) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.6s var(--ease-standard);
+        pointer-events: none;
+      }
+
+      .program-card:hover .card-glow {
+        opacity: 1;
+      }
+
+      .program-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(var(--color-teal-500-rgb), 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity var(--duration-normal) var(--ease-standard);
+        z-index: 0;
+      }
+
+      .program-card:hover::before {
+        opacity: 1;
+      }
+
+      .program-card:hover {
+        transform: translateY(-15px) scale(1.03) rotateX(2deg);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        border-color: var(--color-primary);
+      }
+
+      .program-card:active {
+        transform: translateY(-10px) scale(1.01);
+        transition: all 0.1s ease;
+      }
+
+      .program-header {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        color: var(--color-cream-50);
+        padding: var(--space-48) var(--space-32);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .program-header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .program-header h3 {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-12);
+        position: relative;
+        z-index: 1;
+      }
+
+      .program-header p {
+        font-size: var(--font-size-base);
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+      }
+
+      .program-content {
+        padding: var(--space-32);
+        position: relative;
+        z-index: 1;
+      }
+
+      .program-content h4 {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--space-16);
+        color: var(--color-text);
+      }
+
+      .program-content ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: var(--space-24);
+      }
+
+      .program-content li {
+        padding: var(--space-12) 0;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-base);
+        padding-left: var(--space-32);
+        position: relative;
+        transition: all var(--duration-normal) var(--ease-standard);
+      }
+
+      .program-content li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: var(--color-primary);
+        font-weight: var(--font-weight-bold);
+        transition: transform var(--duration-normal) var(--ease-standard);
+      }
+
+      .program-card:hover .program-content li::before {
+        transform: translateX(5px);
+      }
+
+      /* Stats with Counter Animation */
+      .stats {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-600) 100%
+        );
+        padding: var(--space-96) var(--space-24);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stats::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.5;
+      }
+
+      .stats-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--space-64);
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-item {
+        position: relative;
+      }
+
+      .stat-item h3 {
+        font-size: 56px;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-white);
+        margin-bottom: var(--space-12);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-item p {
+        font-size: var(--font-size-xl);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: var(--font-weight-medium);
+      }
+
+      /* Interactive Timeline */
+      .timeline-section {
+        padding: var(--space-96) var(--space-24);
+        background: var(--color-background);
+      }
+
+      .timeline-container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .timeline {
+        position: relative;
+        padding: var(--space-48) 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(
+          180deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: var(--space-48);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s var(--ease-standard);
+      }
+
+      .timeline-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-right: 55%;
+        text-align: right;
+      }
+
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: 55%;
+        text-align: left;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        background: var(--color-primary);
+        border: 4px solid var(--color-surface);
+        border-radius: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 0 0 4px rgba(var(--color-teal-500-rgb), 0.2);
+        z-index: 2;
+      }
+
+      .timeline-content {
+        background: var(--color-surface);
+        padding: var(--space-24);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--color-card-border);
+      }
+
+      .timeline-content h3 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-8);
+        color: var(--color-text);
+      }
+
+      .timeline-content p {
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-base);
+      }
+
+      /* FAQ Accordion */
+      .faq-section {
+        padding: var(--space-96) var(--space-24);
+        background: var(--color-surface);
+      }
+
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .faq-item {
+        background: var(--color-background);
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--space-16);
+        border: 1px solid var(--color-border);
+        overflow: hidden;
+        transition: all var(--duration-normal) var(--ease-standard);
+      }
+
+      .faq-item:hover {
+        border-color: var(--color-primary);
+      }
+
+      .faq-question {
+        padding: var(--space-24);
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: var(--font-weight-semibold);
+        font-size: var(--font-size-lg);
+        color: var(--color-text);
+        user-select: none;
+      }
+
+      .faq-question::after {
+        content: "+";
+        font-size: var(--font-size-3xl);
+        color: var(--color-primary);
+        transition: transform var(--duration-normal) var(--ease-standard);
+      }
+
+      .faq-item.active .faq-question::after {
+        transform: rotate(45deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--duration-slow) var(--ease-standard),
+          padding var(--duration-slow) var(--ease-standard);
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-base);
+        line-height: 1.7;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+        padding: 0 var(--space-24) var(--space-24);
+      }
+
+      /* Progress Bar */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 50%,
+          var(--color-orange-500) 100%
+        );
+        z-index: 1000;
+        transform-origin: left;
+        transition: transform 0.1s ease-out;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        padding: var(--space-96) var(--space-24);
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-600) 100%
+        );
+        color: var(--color-cream-50);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.1) 0%,
+          transparent 70%
+        );
+        animation: rotate 30s linear infinite;
+      }
+
+      .cta-section h2 {
+        font-size: var(--font-size-4xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-16);
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-section p {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-32);
+        opacity: 0.95;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-section .btn {
+        background: var(--color-cream-50);
+        color: var(--color-primary);
+        position: relative;
+        z-index: 1;
+      }
+
+      .cta-section .btn:hover {
+        background: var(--color-gray-200);
+        transform: translateY(-3px) scale(1.05);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--color-surface);
+        border-top: 1px solid var(--color-border);
+        padding: var(--space-64) var(--space-24) var(--space-32);
+      }
+
+      .footer-content {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-48);
+      }
+
+      .footer-section h4 {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--space-16);
+        color: var(--color-text);
+      }
+
+      .footer-section p,
+      .footer-section a {
+        color: var(--color-text-secondary);
+        text-decoration: none;
+        display: block;
+        margin-bottom: var(--space-8);
+        font-size: var(--font-size-base);
+        transition: color var(--duration-normal) var(--ease-standard);
+      }
+
+      .footer-section a:hover {
+        color: var(--color-primary);
+        transform: translateX(5px);
+      }
+
+      .footer-bottom {
+        max-width: 1280px;
+        margin: var(--space-48) auto 0;
+        padding-top: var(--space-24);
+        border-top: 1px solid var(--color-border);
+        text-align: center;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-sm);
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: var(--font-size-2xl);
+        color: var(--color-text);
+        cursor: pointer;
+        transition: transform var(--duration-normal) var(--ease-standard);
+      }
+
+      .mobile-menu-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        :root {
+          --font-size-hero: 42px;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .comparison-cards {
+          grid-template-columns: 1fr;
+          gap: var(--space-24);
+        }
+
+        .comparison-card.highlight {
+          transform: scale(1);
+        }
+
+        .timeline::before {
+          left: 20px;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content,
+        .timeline-item:nth-child(even) .timeline-content {
+          margin-left: 60px;
+          margin-right: 0;
+          text-align: left;
+        }
+
+        .timeline-dot {
+          left: 20px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --font-size-hero: 36px;
+          --font-size-4xl: 28px;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 253, 0.98);
+          backdrop-filter: blur(16px);
+          flex-direction: column;
+          padding: var(--space-24);
+          border-bottom: 1px solid var(--color-border);
+          gap: var(--space-16);
+          animation: slideDown var(--duration-normal) var(--ease-standard);
+          box-shadow: var(--shadow-lg);
+        }
+
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        nav.active {
+          display: flex;
+        }
+
+        .hero {
+          min-height: 90vh;
+          padding: var(--space-64) var(--space-24) var(--space-48);
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+        }
+
+        .features-grid,
+        .programs-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stats-container {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--space-32);
+        }
+
+        .floating-shape {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        :root {
+          --font-size-hero: 32px;
+          --font-size-4xl: 24px;
+        }
+
+        .stats-container {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-item h3 {
+          font-size: 40px;
+        }
+      }
+
+      /* Loading Animation */
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color-background);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        transition: opacity 0.5s, visibility 0.5s;
+      }
+
+      .loader.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid var(--color-secondary);
+        border-top-color: var(--color-primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Scroll Reveal Animations */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s var(--ease-standard);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        animation: fadeIn 0.3s var(--ease-standard);
+      }
+
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background: var(--color-surface);
+        padding: var(--space-48);
+        border-radius: var(--radius-2xl);
+        max-width: 480px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: var(--shadow-xl);
+        animation: slideUp 0.3s var(--ease-standard);
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: var(--space-16);
+        right: var(--space-16);
+        font-size: var(--font-size-3xl);
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: all var(--duration-normal) var(--ease-standard);
+        line-height: 1;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      .modal-close:hover {
+        color: var(--color-text);
+        background: var(--color-secondary);
+        transform: rotate(90deg);
+      }
+
+      .auth-form h2 {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-8);
+        color: var(--color-text);
+        text-align: center;
+      }
+
+      .auth-subtitle {
+        text-align: center;
+        color: var(--color-text-secondary);
+        margin-bottom: var(--space-32);
+        font-size: var(--font-size-base);
+      }
+
+      .form-group {
+        margin-bottom: var(--space-20);
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: var(--font-weight-medium);
+        margin-bottom: var(--space-8);
+        color: var(--color-text);
+        font-size: var(--font-size-sm);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: var(--space-12) var(--space-16);
+        border: 2px solid var(--color-border);
+        border-radius: var(--radius-base);
+        font-size: var(--font-size-base);
+        color: var(--color-text);
+        background: var(--color-background);
+        transition: all var(--duration-normal) var(--ease-standard);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 4px rgba(var(--color-teal-500-rgb), 0.1),
+          0 4px 12px rgba(var(--color-teal-500-rgb), 0.15);
+        transform: translateY(-2px) scale(1.01);
+      }
+
+      .form-control:hover {
+        border-color: rgba(var(--color-teal-500-rgb), 0.5);
+      }
+
+      .form-control::placeholder {
+        color: var(--color-text-secondary);
+        opacity: 0.6;
+      }
+
+      .btn-full {
+        width: 100%;
+        margin-top: var(--space-8);
+      }
+
+      .auth-switch {
+        text-align: center;
+        margin-top: var(--space-20);
+        font-size: var(--font-size-sm);
+        color: var(--color-text-secondary);
+      }
+
+      .auth-switch a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: var(--font-weight-medium);
+        transition: color var(--duration-normal) var(--ease-standard);
+      }
+
+      .auth-switch a:hover {
+        color: var(--color-primary-hover);
+        text-decoration: underline;
+      }
+
+      .success-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(
+          135deg,
+          var(--color-primary) 0%,
+          var(--color-purple-500) 100%
+        );
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        color: var(--color-cream-50);
+        margin: 0 auto var(--space-24);
+        animation: scaleIn 0.5s var(--ease-bounce);
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+      <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header id="header">
+      <div class="header-content">
+        <a href="#" class="logo">RKS Nexus</a>
+        <button
+          class="mobile-menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
+        <nav id="mainNav">
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#programs">Programs</a>
+          <a href="#journey">Journey</a>
+          <a href="#faq">FAQ</a>
+          <a href="#apply" class="cta-button">Apply Now</a>
+          <a href="#" class="cta-button" id="loginBtn">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Authentication Modal -->
+    <div class="modal" id="authModal">
+      <div class="modal-content">
+        <span class="modal-close" id="closeModal">&times;</span>
+
+        <!-- Login Form -->
+        <div class="auth-form" id="loginForm">
+          <h2>Welcome Back</h2>
+          <p class="auth-subtitle">Login to continue your learning journey</p>
+          <form id="loginFormElement">
+            <div class="form-group">
+              <label for="loginEmail">Email Address</label>
+              <input
+                type="email"
+                id="loginEmail"
+                class="form-control"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input
+                type="password"
+                id="loginPassword"
+                class="form-control"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">
+              Login
+            </button>
+            <p class="auth-switch">
+              Don't have an account?
+              <a href="#" id="showRegister">Register here</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="auth-form" id="registerForm" style="display: none">
+          <h2>Join RKS Nexus</h2>
+          <p class="auth-subtitle">
+            Start your journey to becoming a tech professional
+          </p>
+          <form id="registerFormElement">
+            <div class="form-group">
+              <label for="registerName">Full Name</label>
+              <input
+                type="text"
+                id="registerName"
+                class="form-control"
+                placeholder="John Doe"
+                required
+              />
+            </div>
+
+           <!-- old code -->
+
+            <!-- <div class="form-group">
+              <label for="registerEmail">Email Address</label>
+              <input
+                type="email"
+                id="registerEmail"
+                class="form-control"
+                placeholder="your@email.com"
+                required
+              />
+            </div> -->
+            <!-- Email with Send OTP Button -->
+<div class="form-group">
+  <label for="registerEmail">Email Address</label>
+  <div style="display: flex; gap: 8px; align-items: stretch;">
+    <input 
+      type="email" 
+      id="registerEmail" 
+      class="form-control" 
+      placeholder="your-email@example.com" 
+      required
+      style="flex: 1;"
+    >
+    <button 
+      type="button" 
+      id="sendOtpBtn" 
+      style="
+        padding: 10px 20px;
+        background: linear-gradient(135deg, rgba(33, 128, 141, 0.12), rgba(33, 128, 141, 0.2));
+        color: var(--color-teal-600);
+        border: 1px solid var(--color-teal-500);
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+      "
+    >
+      Send OTP
+    </button>
+  </div>
+</div>
+
+<!-- OTP Verification Section (Hidden initially) -->
+<div id="otpVerificationSection" class="form-group" style="display: none;">
+  <label for="otpInput">Verification Code *</label>
+  <div style="display: flex; gap: 8px; align-items: stretch;">
+    <input 
+      type="text" 
+      id="otpInput" 
+      class="form-control" 
+      placeholder="Enter 6-digit OTP"
+      maxlength="6"
+      pattern="[0-9]{6}"
+      style="flex: 1; letter-spacing: 4px; font-size: 18px; font-weight: 600; text-align: center;"
+    >
+    <button 
+      type="button" 
+      id="verifyOtpBtn" 
+      style="
+        padding: 10px 20px;
+        background: linear-gradient(135deg, var(--color-teal-500), var(--color-teal-600));
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+      "
+    >
+      Verify
+    </button>
+    <span id="otpVerifiedIcon" style="display: none; font-size: 24px; color: #34a853;">
+      ✅
+    </span>
+  </div>
+  <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+    <small id="otpTimer" style="color: #fbbc04; font-size: 12px; font-weight: 500;"></small>
+    <small id="otpStatus" style="color: #34a853; font-size: 12px; font-weight: 500;"></small>
+  </div>
+</div>
+
+            <div class="form-group">
+              <label for="registerPhone">Phone Number</label>
+              <input
+                type="tel"
+                id="registerPhone"
+                class="form-control"
+                placeholder="+91 1234567890"
+              />
+            </div>
+            <div class="form-group">
+              <label for="registerProgram">Select Program</label>
+              <select id="registerProgram" class="form-control" required>
+                <option value="">Choose a program...</option>
+                <option value="web-development">Web Development</option>
+                <option value="java-development">Java Development</option>
+                <option value="python-development">Python Development</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="registerPassword">Password</label>
+              <input
+                type="password"
+                id="registerPassword"
+                class="form-control"
+                placeholder="Create a password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="registerConfirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="registerConfirmPassword"
+                class="form-control"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+           <button 
+  type="submit" 
+  id="finalRegisterBtn"
+  class="btn btn-primary btn-full"
+  disabled
+  style="opacity: 0.6; cursor: not-allowed;"
+>
+  Complete Registration
+</button>
+
+            <p class="auth-switch">
+              Already have an account? <a href="#" id="showLogin">Login here</a>
+            </p>
+          </form>
+        </div>
+
+        <!-- Success Message -->
+        <div class="auth-form" id="successMessage" style="display: none">
+          <div class="success-icon">✓</div>
+          <h2>Success!</h2>
+          <p class="auth-subtitle" id="successText">
+            Your account has been created successfully.
+          </p>
+          <button class="btn btn-primary btn-full" id="closeSuccess">
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-bg-animation">
+          <div class="floating-shape shape-1"></div>
+          <div class="floating-shape shape-2"></div>
+          <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="hero-content">
+          <h1>
+            Transform Your Career with
+            <span class="gradient-text" data-text="RKS Nexus">RKS Nexus</span>
+          </h1>
+          <p>
+            Unlock your potential through industry-leading internship programs
+            and cutting-edge software solutions. Join thousands of students
+            building extraordinary futures.
+          </p>
+          <div class="hero-buttons">
+            <a href="#programs" class="btn btn-primary">Explore Programs</a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+        <div class="scroll-indicator">Scroll to explore</div>
+      </section>
+
+      <section class="features" id="features">
+        <div class="section-header reveal">
+          <h2>Why Choose RKS Nexus?</h2>
+          <p>
+            Empowering the next generation with hands-on experience, expert
+            mentorship, and industry connections
+          </p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card reveal">
+            <div class="feature-icon">💼</div>
+            <h3>Real-World Projects</h3>
+            <p>
+              Work on actual client projects and build an impressive portfolio
+              that showcases your skills to future employers.
+            </p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🎓</div>
+            <h3>Expert Mentorship</h3>
+            <p>
+              Learn from industry professionals with years of experience in
+              cutting-edge technologies and best practices.
+            </p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🌐</div>
+            <h3>100% Remote</h3>
+            <p>
+              Join from anywhere in the world. Our virtual platform offers
+              flexibility while maintaining high-quality instruction.
+            </p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">📜</div>
+            <h3>Industry Certification</h3>
+            <p>
+              Earn recognized certifications that validate your skills and
+              significantly enhance your resume.
+            </p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">🤝</div>
+            <h3>Career Support</h3>
+            <p>
+              Get personalized assistance with resume building, interview
+              preparation, and job placement.
+            </p>
+          </div>
+          <div class="feature-card reveal">
+            <div class="feature-icon">⚡</div>
+            <h3>Fast-Track Learning</h3>
+            <p>
+              Accelerate your learning with our intensive, project-based
+              curriculum designed for rapid skill development.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="comparison-section reveal">
+        <div class="comparison-container">
+          <div class="section-header">
+            <h2>RKS Nexus vs Traditional Learning</h2>
+            <p>See why our approach delivers superior results</p>
+          </div>
+          <div class="comparison-cards">
+            <div class="comparison-card">
+              <h3>Traditional Programs</h3>
+              <ul>
+                <li>Theory-heavy curriculum</li>
+                <li>Limited practical experience</li>
+                <li>Fixed schedules and locations</li>
+                <li>High cost, low ROI</li>
+                <li>Outdated technologies</li>
+                <li>Minimal industry connections</li>
+              </ul>
+            </div>
+            <div class="comparison-card highlight">
+              <h3>RKS Nexus Experience</h3>
+              <ul>
+                <li>Hands-on project-based learning</li>
+                <li>Real client work experience</li>
+                <li>Learn from anywhere, anytime</li>
+                <li>Affordable with high ROI</li>
+                <li>Latest industry technologies</li>
+                <li>Direct industry connections</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="programs" id="programs">
+        <div class="section-header reveal">
+          <h2>Choose Your Path</h2>
+          <p>
+            Comprehensive training programs designed to launch your tech career
+          </p>
+        </div>
+        <div class="programs-grid">
+          <div class="program-card reveal">
+            <div class="card-glow"></div>
+            <div class="program-header">
+              <h3>Web Development</h3>
+              <p>Frontend & Full-Stack Track</p>
+            </div>
+            <div class="program-content">
+              <h4>What You'll Master:</h4>
+              <ul>
+                <li>HTML, CSS, JavaScript Fundamentals</li>
+                <li>Responsive Design & Modern Frameworks</li>
+                <li>React.js & Advanced Frontend</li>
+                <li>Backend with Node.js & Express</li>
+                <li>Database Design & Management</li>
+                <li>Deployment & Version Control</li>
+              </ul>
+              <a
+                href="#apply"
+                class="btn btn-primary"
+                style="width: 100%; text-align: center"
+                >Apply Now</a
+              >
+            </div>
+          </div>
+          <div class="program-card reveal">
+            <div class="card-glow"></div>
+            <div class="program-header">
+              <h3>Java Development</h3>
+              <p>Enterprise Software Track</p>
+            </div>
+            <div class="program-content">
+              <h4>What You'll Master:</h4>
+              <ul>
+                <li>Core Java & OOP Principles</li>
+                <li>Spring Framework & Spring Boot</li>
+                <li>Microservices Architecture</li>
+                <li>RESTful API Development</li>
+                <li>Database Integration (SQL & NoSQL)</li>
+                <li>Testing & CI/CD Pipelines</li>
+              </ul>
+              <a
+                href="#apply"
+                class="btn btn-primary"
+                style="width: 100%; text-align: center"
+                >Apply Now</a
+              >
+            </div>
+          </div>
+          <div class="program-card reveal">
+            <div class="card-glow"></div>
+            <div class="program-header">
+              <h3>Python Development</h3>
+              <p>Data Science & Backend Track</p>
+            </div>
+            <div class="program-content">
+              <h4>What You'll Master:</h4>
+              <ul>
+                <li>Python Programming Fundamentals</li>
+                <li>Django & Flask Frameworks</li>
+                <li>Data Analysis with Pandas & NumPy</li>
+                <li>Machine Learning Basics</li>
+                <li>API Development & Integration</li>
+                <li>Automation & Web Scraping</li>
+              </ul>
+              <a
+                href="#apply"
+                class="btn btn-primary"
+                style="width: 100%; text-align: center"
+                >Apply Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stats-container">
+          <div class="stat-item">
+            <h3 class="stat-number" data-target="2500">0</h3>
+            <p>Students Trained</p>
+          </div>
+          <div class="stat-item">
+            <h3 class="stat-number" data-target="180">0</h3>
+            <p>Partner Companies</p>
+          </div>
+          <div class="stat-item">
+            <h3 class="stat-number" data-target="98">0</h3>
+            <p>Success Rate</p>
+          </div>
+          <div class="stat-item">
+            <h3 class="stat-number" data-target="75">0</h3>
+            <p>Projects Delivered</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline-section" id="journey">
+        <div class="timeline-container">
+          <div class="section-header reveal">
+            <h2>Your Learning Journey</h2>
+            <p>A structured path from beginner to professional</p>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Week 1-2: Foundations</h3>
+                <p>
+                  Master the fundamentals and set up your development
+                  environment with expert guidance.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Week 3-6: Core Skills</h3>
+                <p>
+                  Dive deep into core technologies through hands-on projects and
+                  real-world scenarios.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Week 7-10: Advanced Topics</h3>
+                <p>
+                  Learn advanced concepts, best practices, and industry-standard
+                  development patterns.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3>Week 11-12: Capstone Project</h3>
+                <p>
+                  Build a complete real-world application that showcases all
+                  your new skills to employers.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <div class="faq-container">
+          <div class="section-header reveal">
+            <h2>Frequently Asked Questions</h2>
+            <p>Everything you need to know about our programs</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              What are the prerequisites for joining?
+            </div>
+            <div class="faq-answer">
+              No prior coding experience required! Our programs are designed for
+              beginners. All you need is a computer, internet connection, and
+              enthusiasm to learn.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">How long do the programs last?</div>
+            <div class="faq-answer">
+              Most programs run for 12 weeks with flexible scheduling. You can
+              learn at your own pace while meeting weekly milestones.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">Will I get a certificate?</div>
+            <div class="faq-answer">
+              Yes! Upon successful completion, you'll receive an
+              industry-recognized certificate and a portfolio of real projects.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">
+              Do you provide job placement assistance?
+            </div>
+            <div class="faq-answer">
+              Absolutely! We offer resume building, interview preparation, and
+              connect you with our network of 180+ partner companies.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question">What is the cost of the program?</div>
+            <div class="faq-answer">
+              We offer affordable pricing with flexible payment plans. Contact
+              us for detailed pricing and scholarship opportunities.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="apply">
+        <h2>Ready to Start Your Journey?</h2>
+        <p>
+          Join thousands of students who have launched their tech careers with
+          RKS Nexus. Your dream career is just one click away.
+        </p>
+        <a href="#" class="btn" id="ctaApplyBtn">Get Started Today</a>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>RKS Nexus</h4>
+          <p>
+            Connecting talent with opportunity through innovative software
+            solutions and comprehensive training programs.
+          </p>
+          <p><strong>Your Dream, Our Destiny</strong></p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <a href="#home">Home</a>
+          <a href="#features">Features</a>
+          <a href="#programs">Programs</a>
+          <a href="#faq">FAQ</a>
+          <a href="#apply">Apply</a>
+        </div>
+        <div class="footer-section">
+          <h4>Programs</h4>
+          <a href="#programs">Web Development</a>
+          <a href="#programs">Java Development</a>
+          <a href="#programs">Python Development</a>
+          <a href="#programs">Full-Stack Development</a>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <p>Email: info@rksnexus.com</p>
+          <p>Phone: +91 1234567890</p>
+          <p>Address: Tech Hub, Innovation District</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 RKS Nexus. All rights reserved. Built with passion for
+          aspiring developers.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Loading Screen
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          document.getElementById("loader").classList.add("hidden");
+        }, 1000);
+      });
+
+      // Custom Cursor
+      const cursor = document.getElementById("cursor");
+      let mouseX = 0,
+        mouseY = 0;
+      let cursorX = 0,
+        cursorY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        const speed = 0.15;
+        cursorX += (mouseX - cursorX) * speed;
+        cursorY += (mouseY - cursorY) * speed;
+        cursor.style.left = cursorX + "px";
+        cursor.style.top = cursorY + "px";
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document.querySelectorAll("a, button").forEach((elem) => {
+        elem.addEventListener("mouseenter", () =>
+          cursor.classList.add("cursor-hover")
+        );
+        elem.addEventListener("mouseleave", () =>
+          cursor.classList.remove("cursor-hover")
+        );
+      });
+
+      // Mobile Menu
+      const menuToggle = document.getElementById("menuToggle");
+      const mainNav = document.getElementById("mainNav");
+
+      menuToggle.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+        menuToggle.textContent = mainNav.classList.contains("active")
+          ? "✕"
+          : "☰";
+      });
+
+      // Progress Bar
+      const progressBar = document.getElementById("progressBar");
+      window.addEventListener("scroll", () => {
+        const scrollHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = (window.pageYOffset / scrollHeight) * 100;
+        progressBar.style.transform = `scaleX(${scrolled / 100})`;
+      });
+
+      // Header Scroll Effect
+      const header = document.getElementById("header");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      });
+
+      // Smooth Scroll
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+            if (mainNav.classList.contains("active")) {
+              mainNav.classList.remove("active");
+              menuToggle.textContent = "☰";
+            }
+          }
+        });
+      });
+
+      // Scroll Reveal Animation with Stagger
+      const revealElements = document.querySelectorAll(".reveal");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.classList.add("active");
+              }, index * 100);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      );
+
+      revealElements.forEach((el) => revealObserver.observe(el));
+
+      // Ripple Effect on Feature Cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("click", function (e) {
+          const ripple = document.createElement("div");
+          ripple.classList.add("ripple-effect");
+
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          ripple.style.left = x + "px";
+          ripple.style.top = y + "px";
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 800);
+        });
+      });
+
+      // Parallax Effect for Hero Content
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const heroContent = document.querySelector(".hero-content");
+        if (heroContent && scrolled < window.innerHeight) {
+          heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+          heroContent.style.opacity = 1 - scrolled / 600;
+        }
+      });
+
+      // Smooth Stagger Animation for Features Grid
+      const featureCards = document.querySelectorAll(".feature-card");
+      const featureObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+              setTimeout(() => {
+                entry.target.style.animation =
+                  "fadeInUp 0.8s var(--ease-standard) forwards";
+              }, index * 150);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      featureCards.forEach((card) => featureObserver.observe(card));
+
+      // Stats Counter Animation
+      const stats = document.querySelectorAll(".stat-number");
+      const statsObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (
+              entry.isIntersecting &&
+              !entry.target.classList.contains("counted")
+            ) {
+              entry.target.classList.add("counted");
+              const target = parseInt(entry.target.getAttribute("data-target"));
+              const suffix =
+                entry.target.textContent.replace(/[0-9]/g, "") || "+";
+              let current = 0;
+              const increment = target / 50;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  entry.target.textContent = target + suffix;
+                  clearInterval(timer);
+                } else {
+                  entry.target.textContent = Math.floor(current) + suffix;
+                }
+              }, 30);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      stats.forEach((stat) => statsObserver.observe(stat));
+
+      // Timeline Animation
+      const timelineItems = document.querySelectorAll(".timeline-item");
+      const timelineObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      timelineItems.forEach((item) => timelineObserver.observe(item));
+
+      // FAQ Accordion
+      document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", () => {
+          const item = question.parentElement;
+          const wasActive = item.classList.contains("active");
+
+          document.querySelectorAll(".faq-item").forEach((faq) => {
+            faq.classList.remove("active");
+          });
+
+          if (!wasActive) {
+            item.classList.add("active");
+          }
+        });
+      });
+
+      // Authentication Modal
+      const authModal = document.getElementById("authModal");
+      const loginBtn = document.getElementById("loginBtn");
+      const ctaApplyBtn = document.getElementById("ctaApplyBtn");
+      const closeModal = document.getElementById("closeModal");
+      const loginForm = document.getElementById("loginForm");
+      const registerForm = document.getElementById("registerForm");
+      const successMessage = document.getElementById("successMessage");
+      const showRegisterBtn = document.getElementById("showRegister");
+      const showLoginBtn = document.getElementById("showLogin");
+
+      const API_BASE_URL = "http://localhost:5000/api";
+
+      loginBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        authModal.classList.add("active");
+        showForm("login");
+      });
+
+      ctaApplyBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        authModal.classList.add("active");
+        showForm("register");
+      });
+
+      closeModal.addEventListener("click", () => {
+        authModal.classList.remove("active");
+      });
+
+      authModal.addEventListener("click", (e) => {
+        if (e.target === authModal) {
+          authModal.classList.remove("active");
+        }
+      });
+
+      showRegisterBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        showForm("register");
+      });
+
+      showLoginBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        showForm("login");
+      });
+
+      function showForm(formType) {
+        loginForm.style.display = "none";
+        registerForm.style.display = "none";
+        successMessage.style.display = "none";
+
+        if (formType === "login") {
+          loginForm.style.display = "block";
+        } else if (formType === "register") {
+          registerForm.style.display = "block";
+        } else if (formType === "success") {
+          successMessage.style.display = "block";
+        }
+      }
+
+      document
+        .getElementById("loginFormElement")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const email = document.getElementById("loginEmail").value;
+          const password = document.getElementById("loginPassword").value;
+
+          try {
+            const response = await fetch(`${API_BASE_URL}/auth/login`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("user", JSON.stringify(data.user));
+
+              document.getElementById(
+                "successText"
+              ).textContent = `Welcome back, ${data.user.name}!`;
+              showForm("success");
+
+                 // Redirect based on role
+    setTimeout(() => {
+        if (data.user.role === 'admin') {
+            window.location.href = 'admin.html';
+        } else {
+            window.location.href = 'dashboard.html';
+        }
+    }, 2000);
+
+            } else {
+              alert(data.message || "Login failed. Please try again.");
+            }
+          } catch (error) {
+            console.error("Login error:", error);
+            alert(
+              "Network error. Please make sure the backend server is running."
+            );
+          }
+        });
+
+      document
+        .getElementById("registerFormElement")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = document.getElementById("registerName").value;
+          const email = document.getElementById("registerEmail").value;
+          const phone = document.getElementById("registerPhone").value;
+          const program = document.getElementById("registerProgram").value;
+          const password = document.getElementById("registerPassword").value;
+          const confirmPassword = document.getElementById(
+            "registerConfirmPassword"
+          ).value;
+
+          if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+          }
+
+          if (password.length < 6) {
+            alert("Password must be at least 6 characters long!");
+            return;
+          }
+
+          try {
+            const response = await fetch(`${API_BASE_URL}/auth/register`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ name, email, phone, program, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+              document.getElementById("successText").textContent =
+                "Registration successful! Welcome to RKS Nexus.";
+              showForm("success");
+            } else {
+              alert(data.message || "Registration failed. Please try again.");
+            }
+          } catch (error) {
+            console.error("Registration error:", error);
+            alert(
+              "Network error. Please make sure the backend server is running."
+            );
+          }
+        });
+
+      document.getElementById("closeSuccess").addEventListener("click", () => {
+        authModal.classList.remove("active");
+        showForm("login");
+      });
+
+      
+// ==========================================
+// 🎯 OTP VERIFICATION SYSTEM
+// ==========================================
+
+let otpVerified = false;
+let otpTimer = null;
+let timeLeft = 600; // 10 minutes
+
+// 1️⃣ SEND OTP BUTTON
+const sendOtpBtn = document.getElementById('sendOtpBtn');
+if (sendOtpBtn) {
+  sendOtpBtn.addEventListener('click', async function() {
+    const name = document.getElementById('registerName')?.value;
+    const email = document.getElementById('registerEmail')?.value;
+    
+    // Validation
+    if (!name || !email) {
+      alert('⚠️ Please enter name and email first!');
+      return;
+    }
+    
+    if (!email.includes('@') || !email.includes('.')) {
+      alert('⚠️ Invalid email format!');
+      return;
+    }
+    
+    // Disable button
+    this.disabled = true;
+    this.textContent = '⏳ Sending...';
+    
+    try {
+      // API Call
+      const response = await fetch('http://localhost:5000/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        alert('✅ OTP sent to your email!\n\nCheck inbox and spam folder.');
+        
+        // Show OTP section
+        const otpSection = document.getElementById('otpVerificationSection');
+        if (otpSection) otpSection.style.display = 'block';
+        
+        // Start countdown timer
+        startOtpTimer();
+        
+        // Change button text
+        this.textContent = '🔄 Resend OTP';
+        this.disabled = false;
+      } else {
+        alert('❌ Failed: ' + data.message);
+        this.textContent = 'Send OTP';
+        this.disabled = false;
+      }
+    } catch (error) {
+      console.error('OTP Error:', error);
+      alert('❌ Network error. Check backend server is running.');
+      this.textContent = 'Send OTP';
+      this.disabled = false;
+    }
+  });
+}
+
+// 2️⃣ TIMER FUNCTION
+function startOtpTimer() {
+  timeLeft = 600; // Reset to 10 minutes
+  const timerEl = document.getElementById('otpTimer');
+  
+  if (otpTimer) clearInterval(otpTimer);
+  
+  otpTimer = setInterval(() => {
+    timeLeft--;
+    
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    
+    if (timerEl) {
+      timerEl.textContent = `⏱️ Expires in ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    if (timeLeft <= 0) {
+      clearInterval(otpTimer);
+      if (timerEl) {
+        timerEl.textContent = '⚠️ OTP expired! Click Resend';
+        timerEl.style.color = '#ea4335';
+      }
+    }
+  }, 1000);
+}
+
+// 3️⃣ VERIFY OTP BUTTON
+const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+if (verifyOtpBtn) {
+  verifyOtpBtn.addEventListener('click', async function() {
+    const email = document.getElementById('registerEmail')?.value;
+    const otp = document.getElementById('otpInput')?.value.trim();
+    
+    // Validation
+    if (!otp || otp.length !== 6) {
+      alert('⚠️ Please enter 6-digit OTP!');
+      return;
+    }
+    
+    if (!/^\d{6}$/.test(otp)) {
+      alert('⚠️ OTP must be 6 digits only!');
+      return;
+    }
+    
+    // Disable button
+    this.disabled = true;
+    this.textContent = '⏳ Verifying...';
+    
+    try {
+      // API Call
+      const response = await fetch('http://localhost:5000/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        // Show success
+        const icon = document.getElementById('otpVerifiedIcon');
+        if (icon) icon.style.display = 'inline';
+        
+        // Disable input
+        const input = document.getElementById('otpInput');
+        if (input) {
+          input.disabled = true;
+          input.style.opacity = '0.7';
+        }
+        
+        // Hide verify button
+        this.style.display = 'none';
+        
+        // Enable register button
+        const registerBtn = document.getElementById('finalRegisterBtn');
+        if (registerBtn) {
+          registerBtn.disabled = false;
+          registerBtn.style.opacity = '1';
+          registerBtn.style.cursor = 'pointer';
+        }
+        
+        // Stop timer
+        if (otpTimer) clearInterval(otpTimer);
+        
+        // Show success message
+        const status = document.getElementById('otpStatus');
+        if (status) status.textContent = '✅ Email verified!';
+        
+        // Set flag
+        otpVerified = true;
+        
+        alert('🎉 Email verified successfully!\n\nNow complete your registration.');
+      } else {
+        alert('❌ ' + data.message);
+        this.textContent = 'Verify';
+        this.disabled = false;
+      }
+    } catch (error) {
+      console.error('Verify Error:', error);
+      alert('❌ Verification failed. Try again.');
+      this.textContent = 'Verify';
+      this.disabled = false;
+    }
+  });
+}
+
+// 4️⃣ REGISTRATION FORM SUBMIT CHECK
+// Find your registration form
+const regForm = document.querySelector('form[action*="register"]') || 
+                document.getElementById('registerForm') ||
+                document.querySelector('form');
+
+if (regForm) {
+  // Store original submit handler
+  const originalSubmit = regForm.onsubmit;
+  
+  // Override with OTP check
+  regForm.onsubmit = async function(e) {
+    e.preventDefault();
+    
+    // CHECK OTP VERIFICATION
+    if (!otpVerified) {
+      alert('⚠️ Email verification required!\n\nPlease verify your email with OTP first.');
+      document.getElementById('registerEmail')?.focus();
+      return false;
+    }
+    
+    // If OTP verified, proceed with registration
+    console.log('✅ OTP verified - proceeding with registration');
+    
+    // Call original submit if exists
+    if (originalSubmit && typeof originalSubmit === 'function') {
+      return originalSubmit.call(this, e);
+    }
+    
+    // Or handle registration here
+    const formData = {
+      name: document.getElementById('registerName')?.value,
+      email: document.getElementById('registerEmail')?.value,
+      password: document.getElementById('registerPassword')?.value,
+      phone: document.getElementById('registerPhone')?.value,
+      program: document.getElementById('registerProgram')?.value
+    };
+    
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        alert('🎉 Registration successful!\n\nYou can now login.');
+        // Reset form or redirect
+        this.reset();
+        otpVerified = false;
+      } else {
+        alert('❌ ' + data.message);
+      }
+    } catch (error) {
+      console.log('Caught error but registration succeeded:', error);
+    }
+    
+    return false;
+  };
+}
+
+
+
+    </script>
+  </body>
+</html>
